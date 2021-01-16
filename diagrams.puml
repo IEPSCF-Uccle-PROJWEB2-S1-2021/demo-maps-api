@@ -1,0 +1,57 @@
+@startuml client_api_deployment
+skinparam DefaultFontName "Segoe UI"
+left to right direction
+
+node client_machine as "Machine client" {
+  node client_browser as "Navigateur Internet" {
+    artifact html_page as "Page HTML"
+    together {
+      artifact client_js as "Script JavaScript"
+      artifact client_css as "Feuille de style CSS"
+    }
+  }
+}
+cloud internet as "Internet"
+node app_machine as "Machine serveur applicatif" {
+  node app_server as "Serveur applicatif" {
+    component app as "Application web"
+  }
+}
+node server_machine as "Machine Google" {
+  node api_server as "Serveur Google API" {
+    component maps_api as "Google Maps API"
+  }
+}
+
+app - client_browser
+html_page -- client_css
+html_page -- client_js
+client_js -- internet
+internet -- maps_api
+@enduml
+
+@startuml client_api_seq
+skinparam DefaultFontName "Segoe UI"
+hide footbox
+
+participant browser as "Navigateur Internet"
+participant app_server as "Serveur applicatif"
+participant api_server as "Google API server"
+
+[->> browser
+activate browser
+browser -> app_server : GET /url
+activate app_server
+app_server --> browser : fichiers HTML, CSS, JavaScript
+deactivate app_server
+browser -> browser : executer scripts JavaScript
+activate browser
+browser -> api_server : GET /api-url?api_key=...&params=...
+activate api_server
+api_server --> browser : fichiers images, JavaScript, etc.
+deactivate api_server
+deactivate browser
+browser -> browser : mettre à jour l'affichage
+[<<--browser : affichage
+deactivate browser
+@enduml
