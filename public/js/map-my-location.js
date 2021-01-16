@@ -1,5 +1,4 @@
 let map;
-let infoWindow;
 
 function initMap() {
   const mapDiv = document.getElementById('map');
@@ -8,7 +7,6 @@ function initMap() {
     zoom: 14,
   });
 
-  infoWindow = new google.maps.InfoWindow();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {

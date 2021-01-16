@@ -10,7 +10,7 @@ function initMap() {
     e.preventDefault();
     e.stopPropagation();
     const addressText = addressInput.value;
-    const position = codeAddress(addressText);
+    codeAddress(addressText);
   });
 }
 
