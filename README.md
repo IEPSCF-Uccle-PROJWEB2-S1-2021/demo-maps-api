@@ -1,4 +1,4 @@
-# Express-ejs-template
+# demo-maps-api
 
 Steps to reproduce:
 
