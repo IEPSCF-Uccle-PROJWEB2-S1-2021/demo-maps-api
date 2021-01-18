@@ -3,6 +3,7 @@ const form = document.getElementById('localizationForm');
 const addressInput = document.getElementById('addressInput');
 const latitudeResult = document.getElementById('latitudeResult');
 const longitudeResult = document.getElementById('longitudeResult');
+const typeResult = document.getElementById('typeResult');
 
 function initMap() {
   geocoder = new google.maps.Geocoder();
@@ -20,6 +21,7 @@ function codeAddress(address) {
       const location = results[0].geometry.location;
       latitudeResult.innerText = location.lat();
       longitudeResult.innerText = location.lng();
+      typeResult.innerText = JSON.stringify(results[0].types);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
